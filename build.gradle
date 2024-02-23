@@ -5,11 +5,11 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
 }
 
-version = '0.0.2'
-group = 'com.raremoon'
+version = '0.0.5'
+group = 'com.environs'
 
 base {
-    archivesName = 'raremoon'
+    archivesName = 'environs'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -26,27 +26,27 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                raremoon {
+                environs {
                     source sourceSets.main
                 }
             }
         }
 
         client {
-            property 'forge.enabledGameTestNamespaces', 'raremoon'
+            property 'forge.enabledGameTestNamespaces', 'environs'
         }
 
         server {
-            property 'forge.enabledGameTestNamespaces', 'raremoon'
+            property 'forge.enabledGameTestNamespaces', 'environs'
             args '--nogui'
         }
 
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', 'raremoon'
+            property 'forge.enabledGameTestNamespaces', 'environs'
         }
 
         data {
-            args '--mod', 'raremoon', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'environs', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
 }
@@ -60,12 +60,12 @@ dependencies {
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
-            "Specification-Title": "raremoon",
-            "Specification-Vendor": "raremoonmod",
+            "Specification-Title": "environs",
+            "Specification-Vendor": "environsmod",
             "Specification-Version": "1",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"raremoonmod",
+            "Implementation-Vendor" :"environsmod",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
