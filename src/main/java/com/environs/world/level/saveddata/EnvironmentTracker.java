@@ -10,16 +10,27 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class EnvironmentTracker implements INBTSerializable<CompoundTag> {
-	private Set<String> dimensions = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList("The Overworld")));
+	private static Set<String> dimensions = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList("The Overworld")));
 	private static Set<String> biomes = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList("Plains")));
+	private static String mostRecentDimension;
 	private static String mostRecentBiome;
+
+	public static boolean addDimension(String dimension) {
+		mostRecentDimension = dimension;
+		return dimensions.add(dimension);
+	}
 
 	public Set<String> getDimensions() {
 		return dimensions;
 	}
 
-	public boolean addDimensions(String dimension) {
-		return dimensions.add(dimension);
+	public static String getMostRecentDimension() {
+		return mostRecentDimension;
+	}
+
+	public static boolean addBiome(String biome) {
+		mostRecentBiome = biome;
+		return biomes.add(biome);
 	}
 
 	public Set<String> getBiomes() {
@@ -28,11 +39,6 @@ public class EnvironmentTracker implements INBTSerializable<CompoundTag> {
 
 	public static String getMostRecentBiome() {
 		return mostRecentBiome;
-	}
-
-	public static boolean addBiome(String biome) {
-		mostRecentBiome = biome;
-		return biomes.add(biome);
 	}
 
 	@Override
