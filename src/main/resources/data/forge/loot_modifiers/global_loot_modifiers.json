@@ -1,8 +1,0 @@
-{
-  "entries": [
-    "raremoon:gameplay/fishing/blue_moon_loot_modifier",
-    "raremoon:blocks/fortune_moon_loot_modifier",
-    "raremoon:blocks/harvest_moon_loot_modifier"
-  ],
-  "replace": false
-}

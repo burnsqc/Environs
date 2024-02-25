@@ -4,21 +4,21 @@ logoFile="raremoon.png"
 license="All Rights Reserved"
 
 [[mods]]
-    modId="raremoon"
+    modId="environs"
     version="1.0.0"
-    displayName="RareMoon"
+    displayName="Environs"
     credits="Special thanks to the generous help of the Forge/NeoForge Discord community!"
     authors="burnsqc"
-    description='''RareMoon is a small mod for Minecraft that occasionally causes a rare moon type to appear, affecting gameplay for the night.'''
+    description='''Environs is a small client-only mod for Minecraft that displays title card overlays when chaging dimensions, biomes, and structures.'''
 
-[[dependencies.raremoon]] 
+[[dependencies.environs]] 
     modId="forge" 
     mandatory=true
     versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.raremoon]]
+[[dependencies.environs]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.20.1]"
