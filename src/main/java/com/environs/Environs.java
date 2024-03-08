@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.environs.listeners.AttachCapabilities;
+import com.environs.listeners.PlayerEventListener;
 import com.environs.listeners.TickEventListener;
 import com.environs.network.packets.ClientboundTriggerEnvironsTitleCardPacket;
 import com.environs.setup.ClientSetup;
@@ -35,8 +36,9 @@ public final class Environs {
 
 		MOD_EVENT_BUS.addListener(EnvironsCapabilities::onRegisterCapabilitiesEvent);
 		FORGE_EVENT_BUS.addListener(EnvironsCommands::register);
-		FORGE_EVENT_BUS.addGenericListener(Entity.class, AttachCapabilities::onAttachCapabilitiesEvent);
+		FORGE_EVENT_BUS.addGenericListener(Entity.class, AttachCapabilities::onAttachCapabilities);
 		FORGE_EVENT_BUS.register(new TickEventListener());
+		FORGE_EVENT_BUS.addListener(PlayerEventListener::onClone);
 
 		CHANNEL.registerMessage(PACKET_ID++, ClientboundTriggerEnvironsTitleCardPacket.class, ClientboundTriggerEnvironsTitleCardPacket::encode, ClientboundTriggerEnvironsTitleCardPacket::decode, ClientboundTriggerEnvironsTitleCardPacket::handle);
 

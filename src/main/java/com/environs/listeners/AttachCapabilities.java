@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public final class AttachCapabilities {
 
 	@SubscribeEvent
-	public static void onAttachCapabilitiesEvent(final AttachCapabilitiesEvent<Entity> event) {
+	public static void onAttachCapabilities(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof ServerPlayer) {
 			final EnvironsTrackerProvider environsTrackerProvider = new EnvironsTrackerProvider();
 			event.addCapability(new ResourceLocation(Environs.MOD_ID, "environs_tracker"), environsTrackerProvider);

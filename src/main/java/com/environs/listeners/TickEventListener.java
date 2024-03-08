@@ -21,9 +21,14 @@ import net.minecraftforge.network.PacketDistributor;
 public final class TickEventListener {
 
 	@SubscribeEvent
-	public void onPlayerTickEvent(final TickEvent.PlayerTickEvent event) {
+	public void onPlayerTick(final TickEvent.PlayerTickEvent event) {
 		if (event.player instanceof ServerPlayer serverPlayer) {
-			EnvironsTracker environsTracker = serverPlayer.getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
+			EnvironsTracker environsTracker = serverPlayer.getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElse(null);
+
+			if (environsTracker == null) {
+				return;
+			}
+
 			ServerLevel serverlevel = serverPlayer.serverLevel();
 			BlockPos blockpos = BlockPos.containing(serverPlayer.position());
 

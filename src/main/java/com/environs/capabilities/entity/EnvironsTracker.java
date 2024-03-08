@@ -19,72 +19,96 @@ public final class EnvironsTracker implements INBTSerializable<CompoundTag> {
 	private String mostRecentStructure;
 
 	public Set<String> getDimensions() {
-		return dimensions;
-	}
-
-	public String getMostRecentDimension() {
-		return mostRecentDimension;
-	}
-
-	public boolean addDimension(String dimension) {
-		mostRecentDimension = dimension;
-		if (dimensions.isEmpty()) {
-			dimensions = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList(dimension)));
-			return true;
-		}
-		return dimensions.add(dimension);
-	}
-
-	public void purgeDimensions() {
-		dimensions = Collections.emptySet();
-		mostRecentDimension = "";
+		return this.dimensions;
 	}
 
 	public Set<String> getBiomes() {
-		return biomes;
-	}
-
-	public String getMostRecentBiome() {
-		return mostRecentBiome;
-	}
-
-	public boolean addBiome(String biome) {
-		mostRecentBiome = biome;
-		if (biomes.isEmpty()) {
-			biomes = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList(biome)));
-			return true;
-		}
-		return biomes.add(biome);
-	}
-
-	public void purgeBiomes() {
-		biomes = Collections.emptySet();
-		mostRecentBiome = "";
+		return this.biomes;
 	}
 
 	public Set<String> getStructures() {
-		return structures;
+		return this.structures;
+	}
+
+	public String getMostRecentDimension() {
+		return this.mostRecentDimension;
+	}
+
+	public String getMostRecentBiome() {
+		return this.mostRecentBiome;
 	}
 
 	public String getMostRecentStructure() {
-		return mostRecentStructure;
+		return this.mostRecentStructure;
+	}
+
+	public boolean addDimension(String dimension) {
+		this.mostRecentDimension = dimension;
+		if (this.dimensions.isEmpty()) {
+			this.dimensions = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList(dimension)));
+			return true;
+		}
+		return this.dimensions.add(dimension);
+	}
+
+	public boolean addBiome(String biome) {
+		this.mostRecentBiome = biome;
+		if (this.biomes.isEmpty()) {
+			this.biomes = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList(biome)));
+			return true;
+		}
+		return this.biomes.add(biome);
 	}
 
 	public boolean addStructure(String structure) {
-		mostRecentStructure = structure;
-		if (!structure.equals("")) {
-			if (structures.isEmpty()) {
-				structures = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList(structure)));
-				return true;
-			}
-			return structures.add(structure);
+		this.mostRecentStructure = structure;
+		if (structure.equals("")) {
+			return false;
 		}
-		return false;
+		if (this.structures.isEmpty()) {
+			this.structures = new LinkedHashSet<String>(new ArrayList<String>(Arrays.asList(structure)));
+			return true;
+		}
+		return this.structures.add(structure);
+	}
+
+	public void setMostRecentDimension(String dimension) {
+		this.mostRecentDimension = dimension;
+	}
+
+	public void setMostRecentBiome(String biome) {
+		this.mostRecentBiome = biome;
+	}
+
+	public void setMostRecentStructure(String structure) {
+		this.mostRecentStructure = structure;
+	}
+
+	public void purgeDimensions() {
+		this.dimensions = Collections.emptySet();
+		this.mostRecentDimension = "";
+	}
+
+	public void purgeBiomes() {
+		this.biomes = Collections.emptySet();
+		this.mostRecentBiome = "";
 	}
 
 	public void purgeStructures() {
-		structures = Collections.emptySet();
-		mostRecentStructure = "";
+		this.structures = Collections.emptySet();
+		this.mostRecentStructure = "";
+	}
+
+	public void cloneDimensions(Set<String> dimensions) {
+		this.dimensions = dimensions;
+	}
+
+	public void cloneBiomes(Set<String> biomes) {
+		this.biomes = biomes;
+	}
+
+	public void cloneStructures(Set<String> structures) {
+		this.structures = structures;
 	}
 
 	@Override

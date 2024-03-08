@@ -10,6 +10,6 @@ import net.minecraftforge.fml.config.ModConfig.Type;
 public final class ClientSetup {
 	public static void init() {
 		ModLoadingContext.get().registerConfig(Type.CLIENT, EnvironsConfigClient.CLIENT_SPEC, "environs-client.toml");
-		Environs.FORGE_EVENT_BUS.addListener(RenderGuiOverlayEventListener::onRenderGameOverlayPreEvent);
+		Environs.FORGE_EVENT_BUS.addListener(RenderGuiOverlayEventListener::onPre);
 	}
 }

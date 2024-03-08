@@ -22,7 +22,7 @@ public final class RenderGuiOverlayEventListener {
 	private static String structureName;
 
 	@SubscribeEvent
-	public static void onRenderGameOverlayPreEvent(final RenderGuiOverlayEvent.Pre event) {
+	public static void onPre(final RenderGuiOverlayEvent.Pre event) {
 		if (event.getOverlay() == VanillaGuiOverlay.CROSSHAIR.type()) {
 			Minecraft minecraft = Minecraft.getInstance();
 			MultiBufferSource.BufferSource irendertypebuffer$impl = minecraft.renderBuffers().bufferSource();
