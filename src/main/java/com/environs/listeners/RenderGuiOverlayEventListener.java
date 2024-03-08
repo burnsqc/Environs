@@ -14,17 +14,20 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public final class RenderGuiOverlayEventListener {
-	private static int fadeDimensionTimer;
-	private static int fadeBiomeTimer;
-	private static int fadeStructureTimer;
+	private static long fadeDimensionTimer;
+	private static long fadeBiomeTimer;
+	private static long fadeStructureTimer;
 	private static String dimensionName;
 	private static String biomeName;
 	private static String structureName;
+	private static long time;
 
 	@SubscribeEvent
 	public static void onPre(final RenderGuiOverlayEvent.Pre event) {
 		if (event.getOverlay() == VanillaGuiOverlay.CROSSHAIR.type()) {
+
 			Minecraft minecraft = Minecraft.getInstance();
+			time = minecraft.level.getGameTime();
 			MultiBufferSource.BufferSource irendertypebuffer$impl = minecraft.renderBuffers().bufferSource();
 
 			float scaledWidth25 = minecraft.getWindow().getGuiScaledWidth() / 2.5F;
@@ -68,21 +71,9 @@ public final class RenderGuiOverlayEventListener {
 			biomeNamePosY = dimensionNamePosY * 1.25F + 15.0F;
 			structurenamePosY = biomeNamePosY * 1.33F + 17.0F;
 
-			if (fadeDimensionTimer > 0) {
-				fadeDimensionTimer--;
-			}
-
-			if (fadeBiomeTimer > 0) {
-				fadeBiomeTimer--;
-			}
-
-			if (fadeStructureTimer > 0) {
-				fadeStructureTimer--;
-			}
-
-			float dimensionAlpha = Mth.clamp(fadeDimensionTimer > 400 ? -(fadeDimensionTimer - 750) / 200F : (fadeDimensionTimer - 50) / 200F, 0.0F, 1.0F);
-			float biomeAlpha = Mth.clamp(fadeBiomeTimer > 400 ? -(fadeBiomeTimer - 650) / 200F : (fadeBiomeTimer - 50) / 200F, 0.0F, 1.0F);
-			float structureAlpha = Mth.clamp(fadeStructureTimer > 400 ? -(fadeStructureTimer - 650) / 200F : (fadeStructureTimer - 50) / 200F, 0.0F, 1.0F);
+			float dimensionAlpha = Mth.clamp(time - fadeDimensionTimer < 70 ? (time - fadeDimensionTimer) / 40F : -(time - fadeDimensionTimer - 140) / 40F, 0.0F, 1.0F);
+			float biomeAlpha = Mth.clamp(time - fadeBiomeTimer < 80 ? (time - fadeBiomeTimer - 20) / 40F : -(time - fadeBiomeTimer - 140) / 40F, 0.0F, 1.0F);
+			float structureAlpha = Mth.clamp(time - fadeStructureTimer < 80 ? (time - fadeStructureTimer - 20) / 40F : -(time - fadeStructureTimer - 140) / 40F, 0.0F, 1.0F);
 
 			if (dimensionAlpha > 0.015) {
 				event.getGuiGraphics().pose().pushPose();
@@ -111,23 +102,26 @@ public final class RenderGuiOverlayEventListener {
 	}
 
 	public static void triggerDimensionTitleCard(String dimension) {
-		if (fadeDimensionTimer == 0) {
+		Minecraft minecraft = Minecraft.getInstance();
+		if (minecraft.level.getGameTime() - fadeDimensionTimer > 120) {
 			dimensionName = dimension;
-			fadeDimensionTimer = 800;
+			fadeDimensionTimer = minecraft.level.getGameTime();
 		}
 	}
 
 	public static void triggerBiomeTitleCard(String biome) {
-		if (fadeBiomeTimer == 0) {
+		Minecraft minecraft = Minecraft.getInstance();
+		if (minecraft.level.getGameTime() - fadeBiomeTimer > 120) {
 			biomeName = biome;
-			fadeBiomeTimer = fadeDimensionTimer > 0 ? 800 : 700;
+			fadeBiomeTimer = minecraft.level.getGameTime();
 		}
 	}
 
 	public static void triggerStructureTitleCard(String structure) {
-		if (fadeStructureTimer == 0) {
+		Minecraft minecraft = Minecraft.getInstance();
+		if (minecraft.level.getGameTime() - fadeStructureTimer > 120) {
 			structureName = structure;
-			fadeStructureTimer = 700;
+			fadeStructureTimer = minecraft.level.getGameTime();
 		}
 	}
 }
