@@ -46,13 +46,13 @@ public final class EnvironsListCommand {
 			return Component.literal("Visited Biomes").withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get()).withUnderlined(true);
 			});
-		}, true);
+		}, false);
 		for (String biome : environsTracker.getBiomes()) {
 			stack.sendSuccess(() -> {
 				return Component.literal(biome).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
 				});
-			}, true);
+			}, false);
 
 		}
 		return 0;
@@ -64,13 +64,13 @@ public final class EnvironsListCommand {
 			return Component.literal("Visited Dimensions").withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get()).withUnderlined(true);
 			});
-		}, true);
+		}, false);
 		for (String dimension : environsTracker.getDimensions()) {
 			stack.sendSuccess(() -> {
 				return Component.literal(dimension).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
 				});
-			}, true);
+			}, false);
 
 		}
 		return 0;
@@ -82,14 +82,14 @@ public final class EnvironsListCommand {
 			return Component.literal("Visited Structures").withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get()).withUnderlined(true);
 			});
-		}, true);
+		}, false);
 		if (environsTracker.getStructures() != null) {
 			for (String structure : environsTracker.getStructures()) {
 				stack.sendSuccess(() -> {
 					return Component.literal(structure).withStyle((p_265659_) -> {
 						return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
 					});
-				}, true);
+				}, false);
 
 			}
 		}
@@ -110,7 +110,7 @@ public final class EnvironsListCommand {
 			return Component.literal("Visited Biomes purged").withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
 			});
-		}, true);
+		}, false);
 		return 0;
 	}
 
@@ -121,7 +121,7 @@ public final class EnvironsListCommand {
 			return Component.literal("Visited Dimensions purged").withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
 			});
-		}, true);
+		}, false);
 		return 0;
 	}
 
@@ -132,7 +132,7 @@ public final class EnvironsListCommand {
 			return Component.literal("Visited Structures purged").withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
 			});
-		}, true);
+		}, false);
 		return 0;
 	}
 }
