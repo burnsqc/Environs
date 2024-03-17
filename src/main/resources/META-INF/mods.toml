@@ -7,7 +7,7 @@ license="All Rights Reserved"
     displayName="Environs"    
     version="1.0.0-beta1"
     modId="environs"
-    credits="Skullmaster31 - logo/testing"
+    credits="Skullmaster31 - collaboration/testing"
     authors="burnsqc"
     description='''Environs is a mod for Minecraft that displays title card overlays when chaging dimensions, biomes, and structures.'''
 
