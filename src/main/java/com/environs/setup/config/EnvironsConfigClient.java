@@ -35,7 +35,7 @@ public final class EnvironsConfigClient {
 		BUILDER.pop();
 
 		BUILDER.push("POSITION");
-		POSITION_VERTICAL = BUILDER.comment("top - Display title cards at top of screen.\ncenter - Display title cards at center of screen.\nbottom - Display title cards at bottom of screen.").defineInList("Vertical", "top", Arrays.asList("top", "center", "bottom"));
+		POSITION_VERTICAL = BUILDER.comment("top - Display title cards at top of screen.\ncenter - Display title cards at center of screen.\nbottom - Display title cards at bottom of screen.").defineInList("Vertical", "center", Arrays.asList("top", "center", "bottom"));
 		POSITION_HORIZONTAL = BUILDER.comment("left - Display title cards at left of screen.\ncenter - Display title cards at center of screen.\nright - Display title cards at right of screen.").defineInList("Horizontal", "center", Arrays.asList("left", "center", "right"));
 		BUILDER.pop();
 
