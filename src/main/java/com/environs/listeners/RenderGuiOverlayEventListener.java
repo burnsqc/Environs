@@ -79,7 +79,7 @@ public final class RenderGuiOverlayEventListener {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
 				matrix4f.scale(2.5F, 2.5F, 2.5F);
-				minecraft.font.drawInBatch(ChatFormatting.UNDERLINE + dimensionName, dimensionNamePosX, dimensionNamePosY, EnvironsConfigClient.DIMENSION_COLOR.get() | (int) (dimensionAlpha * 255.0F) << 24, true, matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
+				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? ChatFormatting.UNDERLINE + dimensionName : dimensionName, dimensionNamePosX, dimensionNamePosY, EnvironsConfigClient.DIMENSION_COLOR.get() | (int) (dimensionAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
 				event.getGuiGraphics().pose().popPose();
 			}
 
@@ -87,15 +87,15 @@ public final class RenderGuiOverlayEventListener {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
 				matrix4f.scale(2.0F, 2.0F, 2.0F);
-				minecraft.font.drawInBatch(ChatFormatting.UNDERLINE + biomeName, biomeNamePosX, biomeNamePosY, EnvironsConfigClient.BIOME_COLOR.get() | (int) (biomeAlpha * 255.0F) << 24, true, matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
+				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? ChatFormatting.UNDERLINE + biomeName : biomeName, biomeNamePosX, biomeNamePosY, EnvironsConfigClient.BIOME_COLOR.get() | (int) (biomeAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
 				event.getGuiGraphics().pose().popPose();
 			}
 
-			if (structureAlpha > 0.015) {
+			if (structureAlpha > 0.015 && structureName != null) {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
 				matrix4f.scale(1.5F, 1.5F, 1.5F);
-				minecraft.font.drawInBatch(ChatFormatting.UNDERLINE + structureName, structureNamePosX, structurenamePosY, EnvironsConfigClient.STRUCTURE_COLOR.get() | (int) (structureAlpha * 255.0F) << 24, true, matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
+				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? ChatFormatting.UNDERLINE + structureName : structureName, structureNamePosX, structurenamePosY, EnvironsConfigClient.STRUCTURE_COLOR.get() | (int) (structureAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
 				event.getGuiGraphics().pose().popPose();
 			}
 		}
@@ -103,7 +103,7 @@ public final class RenderGuiOverlayEventListener {
 
 	public static void triggerDimensionTitleCard(String dimension) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level.getGameTime() - fadeDimensionTimer > 120) {
+		if (minecraft.level.getGameTime() - fadeDimensionTimer > 120 || fadeDimensionTimer == 0) {
 			dimensionName = dimension;
 			fadeDimensionTimer = minecraft.level.getGameTime();
 		}
@@ -111,7 +111,7 @@ public final class RenderGuiOverlayEventListener {
 
 	public static void triggerBiomeTitleCard(String biome) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level.getGameTime() - fadeBiomeTimer > 120) {
+		if (minecraft.level.getGameTime() - fadeBiomeTimer > 120 || fadeBiomeTimer == 0) {
 			biomeName = biome;
 			fadeBiomeTimer = minecraft.level.getGameTime();
 		}
@@ -119,7 +119,7 @@ public final class RenderGuiOverlayEventListener {
 
 	public static void triggerStructureTitleCard(String structure) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level.getGameTime() - fadeStructureTimer > 120) {
+		if (minecraft.level.getGameTime() - fadeStructureTimer > 120 || fadeStructureTimer == 0) {
 			structureName = structure;
 			fadeStructureTimer = minecraft.level.getGameTime();
 		}

@@ -21,6 +21,9 @@ public final class EnvironsConfigClient {
 	public static final ForgeConfigSpec.ConfigValue<Integer> BIOME_COLOR;
 	public static final ForgeConfigSpec.ConfigValue<Integer> STRUCTURE_COLOR;
 
+	public static final ForgeConfigSpec.ConfigValue<Boolean> UNDERLINE;
+	public static final ForgeConfigSpec.ConfigValue<Boolean> SHADOW;
+
 	static {
 		BUILDER.comment("ENVIRONS CLIENT CONFIG\n");
 
@@ -40,9 +43,14 @@ public final class EnvironsConfigClient {
 		BUILDER.pop();
 
 		BUILDER.push("COLOR");
-		DIMENSION_COLOR = BUILDER.comment("hex color code").defineInRange("Dimension", 0xAAFFFF, 0, 16777215);
-		BIOME_COLOR = BUILDER.comment("hex color code").defineInRange("Biome", 0xAAFFAA, 0, 16777215);
-		STRUCTURE_COLOR = BUILDER.comment("hex color code").defineInRange("Structure", 0xFFFFAA, 0, 16777215);
+		DIMENSION_COLOR = BUILDER.comment("hex or RGBA color code").defineInRange("Dimension", 0xAAFFFF, 0, 16777215);
+		BIOME_COLOR = BUILDER.comment("hex or RGBA color code").defineInRange("Biome", 0xAAFFAA, 0, 16777215);
+		STRUCTURE_COLOR = BUILDER.comment("hex or RGBA color code").defineInRange("Structure", 0xFFFFAA, 0, 16777215);
+		BUILDER.pop();
+
+		BUILDER.push("STYLE");
+		UNDERLINE = BUILDER.comment("show title cards with underline").define("Underline", true);
+		SHADOW = BUILDER.comment("show title cards with shadow").define("Shadow", true);
 		BUILDER.pop();
 
 		CLIENT_SPEC = BUILDER.build();
