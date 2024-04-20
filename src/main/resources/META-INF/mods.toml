@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+logoFile="environs.png"
+license="All Rights Reserved"
+
+[[mods]]
+    displayName="Environs"    
+    version="1.0.0-alpha1"
+    modId="environs"
+    credits="Skullmaster31 - collaboration/testing"
+    authors="burnsqc"
+    description='''Environs is a mod for Minecraft that displays title card overlays when chaging dimensions, biomes, and structures.'''
+
+[[dependencies.environs]] 
+    modId="forge" 
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.environs]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="NONE"
+    side="BOTH"
