@@ -30,10 +30,8 @@ public final class RenderGuiOverlayEventListener {
 			time = minecraft.level.getGameTime();
 			MultiBufferSource.BufferSource irendertypebuffer$impl = minecraft.renderBuffers().bufferSource();
 
-			float scaledWidth25 = minecraft.getWindow().getGuiScaledWidth() / 2.5F;
-			float scaledWidth2 = minecraft.getWindow().getGuiScaledWidth() / 2.0F;
-			float scaledWidth15 = minecraft.getWindow().getGuiScaledWidth() / 1.5F;
-			float scaledHeight25 = minecraft.getWindow().getGuiScaledHeight() / 2.5F;
+			float scaledWidth = minecraft.getWindow().getGuiScaledWidth();
+			float scaledHeight = minecraft.getWindow().getGuiScaledHeight();
 
 			float dimensionWidth = minecraft.font.width(dimensionName);
 			float biomeWidth = minecraft.font.width(biomeName);
@@ -46,30 +44,58 @@ public final class RenderGuiOverlayEventListener {
 			float structureNamePosX;
 			float structurenamePosY;
 
-			if (EnvironsConfigClient.POSITION_HORIZONTAL.get().equals("left")) {
-				dimensionNamePosX = 2.0F;
-				biomeNamePosX = 2.5F;
-				structureNamePosX = 3.0F;
-			} else if (EnvironsConfigClient.POSITION_HORIZONTAL.get().equals("center")) {
-				dimensionNamePosX = (scaledWidth25 - dimensionWidth) / 2;
-				biomeNamePosX = (scaledWidth2 - biomeWidth) / 2;
-				structureNamePosX = (scaledWidth15 - structureWidth) / 2;
+			float dimensionSize;
+			float biomeSize;
+			float structureSize;
+
+			if (EnvironsConfigClient.DIMENSION_SIZE.get().equals("large")) {
+				dimensionSize = 2.5F;
+			} else if (EnvironsConfigClient.DIMENSION_SIZE.get().equals("medium")) {
+				dimensionSize = 2.0F;
 			} else {
-				dimensionNamePosX = scaledWidth25 - dimensionWidth - 2.0F;
-				biomeNamePosX = scaledWidth2 - biomeWidth - 2.5F;
-				structureNamePosX = scaledWidth15 - structureWidth - 3.0F;
+				dimensionSize = 1.5F;
+			}
+
+			if (EnvironsConfigClient.BIOME_SIZE.get().equals("large")) {
+				biomeSize = 2.5F;
+			} else if (EnvironsConfigClient.BIOME_SIZE.get().equals("medium")) {
+				biomeSize = 2.0F;
+			} else {
+				biomeSize = 1.5F;
+			}
+
+			if (EnvironsConfigClient.STRUCTURE_SIZE.get().equals("large")) {
+				structureSize = 2.5F;
+			} else if (EnvironsConfigClient.STRUCTURE_SIZE.get().equals("medium")) {
+				structureSize = 2.0F;
+			} else {
+				structureSize = 1.5F;
+			}
+
+			if (EnvironsConfigClient.POSITION_HORIZONTAL.get().equals("left")) {
+				dimensionNamePosX = 5 / dimensionSize;
+				biomeNamePosX = 5 / biomeSize;
+				structureNamePosX = 5 / structureSize;
+			} else if (EnvironsConfigClient.POSITION_HORIZONTAL.get().equals("center")) {
+				dimensionNamePosX = (scaledWidth / dimensionSize - dimensionWidth) / 2;
+				biomeNamePosX = (scaledWidth / biomeSize - biomeWidth) / 2;
+				structureNamePosX = (scaledWidth / structureSize - structureWidth) / 2;
+			} else {
+				dimensionNamePosX = scaledWidth / dimensionSize - dimensionWidth - 5 / dimensionSize;
+				biomeNamePosX = scaledWidth / biomeSize - biomeWidth - 5 / biomeSize;
+				structureNamePosX = scaledWidth / structureSize - structureWidth - 5 / structureSize;
 			}
 
 			if (EnvironsConfigClient.POSITION_VERTICAL.get().equals("top")) {
-				dimensionNamePosY = 2.0F;
+				dimensionNamePosY = 5 / dimensionSize;
 			} else if (EnvironsConfigClient.POSITION_VERTICAL.get().equals("center")) {
-				dimensionNamePosY = scaledHeight25 / 2 - 15.0F;
+				dimensionNamePosY = scaledHeight / 2 / dimensionSize - 16;
 			} else {
-				dimensionNamePosY = scaledHeight25 - 45.0F;
+				dimensionNamePosY = scaledHeight / dimensionSize - 48;
 			}
 
-			biomeNamePosY = dimensionNamePosY * 1.25F + 15.0F;
-			structurenamePosY = biomeNamePosY * 1.33F + 17.0F;
+			biomeNamePosY = (dimensionNamePosY + 11) * dimensionSize / biomeSize;
+			structurenamePosY = (biomeNamePosY + 11) * biomeSize / structureSize;
 
 			float dimensionAlpha = Mth.clamp(time - fadeDimensionTimer < 70 ? (time - fadeDimensionTimer) / 40F : -(time - fadeDimensionTimer - 140) / 40F, 0.0F, 1.0F);
 			float biomeAlpha = Mth.clamp(time - fadeBiomeTimer < 80 ? (time - fadeBiomeTimer - 20) / 40F : -(time - fadeBiomeTimer - 140) / 40F, 0.0F, 1.0F);
@@ -85,18 +111,18 @@ public final class RenderGuiOverlayEventListener {
 				structureAlpha = 1.0F;
 			}
 
-			if (dimensionAlpha > 0.015) {
+			if (dimensionAlpha > 0.015 && dimensionName != null) {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
-				matrix4f.scale(2.5F, 2.5F, 2.5F);
+				matrix4f.scale(dimensionSize, dimensionSize, dimensionSize);
 				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? ChatFormatting.UNDERLINE + dimensionName : dimensionName, dimensionNamePosX, dimensionNamePosY, EnvironsConfigClient.DIMENSION_COLOR.get() | (int) (dimensionAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
 				event.getGuiGraphics().pose().popPose();
 			}
 
-			if (biomeAlpha > 0.015) {
+			if (biomeAlpha > 0.015 && biomeName != null) {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
-				matrix4f.scale(2.0F, 2.0F, 2.0F);
+				matrix4f.scale(biomeSize, biomeSize, biomeSize);
 				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? ChatFormatting.UNDERLINE + biomeName : biomeName, biomeNamePosX, biomeNamePosY, EnvironsConfigClient.BIOME_COLOR.get() | (int) (biomeAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
 				event.getGuiGraphics().pose().popPose();
 			}
@@ -104,7 +130,7 @@ public final class RenderGuiOverlayEventListener {
 			if (structureAlpha > 0.015 && structureName != null) {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
-				matrix4f.scale(1.5F, 1.5F, 1.5F);
+				matrix4f.scale(structureSize, structureSize, structureSize);
 				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? ChatFormatting.UNDERLINE + structureName : structureName, structureNamePosX, structurenamePosY, EnvironsConfigClient.STRUCTURE_COLOR.get() | (int) (structureAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
 				event.getGuiGraphics().pose().popPose();
 			}

@@ -14,6 +14,10 @@ public final class EnvironsConfigClient {
 	public static final ForgeConfigSpec.ConfigValue<String> BIOME_TITLE_CARDS;
 	public static final ForgeConfigSpec.ConfigValue<String> STRUCTURE_TITLE_CARDS;
 
+	public static final ForgeConfigSpec.ConfigValue<String> DIMENSION_SIZE;
+	public static final ForgeConfigSpec.ConfigValue<String> BIOME_SIZE;
+	public static final ForgeConfigSpec.ConfigValue<String> STRUCTURE_SIZE;
+
 	public static final ForgeConfigSpec.ConfigValue<String> POSITION_VERTICAL;
 	public static final ForgeConfigSpec.ConfigValue<String> POSITION_HORIZONTAL;
 
@@ -35,6 +39,12 @@ public final class EnvironsConfigClient {
 		DIMENSION_TITLE_CARDS = BUILDER.comment("first - Display a title card on first discovery.\nevery - Display a title card on every entrance.\nnever - Never display title cards.\nalways - Always display title cards.").defineInList("Dimension Title Cards", "first", Arrays.asList("first", "every", "never", "always"));
 		BIOME_TITLE_CARDS = BUILDER.defineInList("Biome Title Cards", "first", Arrays.asList("first", "every", "never", "always"));
 		STRUCTURE_TITLE_CARDS = BUILDER.defineInList("Structure Title Cards", "first", Arrays.asList("first", "every", "never", "always"));
+		BUILDER.pop();
+
+		BUILDER.push("SIZE");
+		DIMENSION_SIZE = BUILDER.comment("large - Large title card.\nmedium - Medium title card.\nsmall - Small title card.").defineInList("Dimension", "large", Arrays.asList("large", "medium", "small"));
+		BIOME_SIZE = BUILDER.defineInList("Biome", "medium", Arrays.asList("large", "medium", "small"));
+		STRUCTURE_SIZE = BUILDER.defineInList("Structure", "small", Arrays.asList("large", "medium", "small"));
 		BUILDER.pop();
 
 		BUILDER.push("POSITION");
