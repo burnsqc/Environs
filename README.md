@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/burnsqc/Environs/main/src/main/resources/environs.png">
+  <img src="https://raw.githubusercontent.com/burnsqc/Environs/alpha/src/main/resources/environs.png">
 </div>
 
 Environs is a mod for Minecraft that displays title card overlays when chaging dimensions, biomes, and structures.
