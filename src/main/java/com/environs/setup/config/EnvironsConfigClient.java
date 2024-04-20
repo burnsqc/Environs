@@ -32,9 +32,9 @@ public final class EnvironsConfigClient {
 		BUILDER.comment("These settings have been set to defaults selected by the Environs development team.\n");
 
 		BUILDER.push("TRIGGERS");
-		DIMENSION_TITLE_CARDS = BUILDER.comment("first - Display a title card for a dimension on first discovery.\nalways - Display a title card for a dimension on every entrance.\nnever - Never display dimension title cards.").defineInList("Dimension Title Cards", "first", Arrays.asList("first", "always", "never"));
-		BIOME_TITLE_CARDS = BUILDER.comment("first - Display a title card for a biome on first discovery.\nalways - Display a title card for a biome on every entrance.\nnever - Never display biome title cards.").defineInList("Biome Title Cards", "first", Arrays.asList("first", "always", "never"));
-		STRUCTURE_TITLE_CARDS = BUILDER.comment("first - Display a title card for a structure on first discovery.\nalways - Display a title card for a structure on every entrance.\nnever - Never display structure title cards.").defineInList("Structure Title Cards", "first", Arrays.asList("first", "always", "never"));
+		DIMENSION_TITLE_CARDS = BUILDER.comment("first - Display a title card on first discovery.\nevery - Display a title card on every entrance.\nnever - Never display title cards.\nalways - Always display title cards.").defineInList("Dimension Title Cards", "first", Arrays.asList("first", "every", "never", "always"));
+		BIOME_TITLE_CARDS = BUILDER.defineInList("Biome Title Cards", "first", Arrays.asList("first", "every", "never", "always"));
+		STRUCTURE_TITLE_CARDS = BUILDER.defineInList("Structure Title Cards", "first", Arrays.asList("first", "every", "never", "always"));
 		BUILDER.pop();
 
 		BUILDER.push("POSITION");
@@ -44,8 +44,8 @@ public final class EnvironsConfigClient {
 
 		BUILDER.push("COLOR");
 		DIMENSION_COLOR = BUILDER.comment("hex or RGBA color code").defineInRange("Dimension", 0xAAFFFF, 0, 16777215);
-		BIOME_COLOR = BUILDER.comment("hex or RGBA color code").defineInRange("Biome", 0xAAFFAA, 0, 16777215);
-		STRUCTURE_COLOR = BUILDER.comment("hex or RGBA color code").defineInRange("Structure", 0xFFFFAA, 0, 16777215);
+		BIOME_COLOR = BUILDER.defineInRange("Biome", 0xAAFFAA, 0, 16777215);
+		STRUCTURE_COLOR = BUILDER.defineInRange("Structure", 0xFFFFAA, 0, 16777215);
 		BUILDER.pop();
 
 		BUILDER.push("STYLE");

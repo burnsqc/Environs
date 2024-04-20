@@ -75,6 +75,16 @@ public final class RenderGuiOverlayEventListener {
 			float biomeAlpha = Mth.clamp(time - fadeBiomeTimer < 80 ? (time - fadeBiomeTimer - 20) / 40F : -(time - fadeBiomeTimer - 140) / 40F, 0.0F, 1.0F);
 			float structureAlpha = Mth.clamp(time - fadeStructureTimer < 80 ? (time - fadeStructureTimer - 20) / 40F : -(time - fadeStructureTimer - 140) / 40F, 0.0F, 1.0F);
 
+			if (EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("always")) {
+				dimensionAlpha = 1.0F;
+			}
+			if (EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("always")) {
+				biomeAlpha = 1.0F;
+			}
+			if (EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("always")) {
+				structureAlpha = 1.0F;
+			}
+
 			if (dimensionAlpha > 0.015) {
 				event.getGuiGraphics().pose().pushPose();
 				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
@@ -103,7 +113,7 @@ public final class RenderGuiOverlayEventListener {
 
 	public static void triggerDimensionTitleCard(String dimension) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level.getGameTime() - fadeDimensionTimer > 120 || fadeDimensionTimer == 0) {
+		if (minecraft.level.getGameTime() - fadeDimensionTimer > 120 || fadeDimensionTimer == 0 || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("always")) {
 			dimensionName = dimension;
 			fadeDimensionTimer = minecraft.level.getGameTime();
 		}
@@ -111,7 +121,7 @@ public final class RenderGuiOverlayEventListener {
 
 	public static void triggerBiomeTitleCard(String biome) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level.getGameTime() - fadeBiomeTimer > 120 || fadeBiomeTimer == 0) {
+		if (minecraft.level.getGameTime() - fadeBiomeTimer > 120 || fadeBiomeTimer == 0 || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("always")) {
 			biomeName = biome;
 			fadeBiomeTimer = minecraft.level.getGameTime();
 		}
@@ -119,7 +129,7 @@ public final class RenderGuiOverlayEventListener {
 
 	public static void triggerStructureTitleCard(String structure) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level.getGameTime() - fadeStructureTimer > 120 || fadeStructureTimer == 0) {
+		if (minecraft.level.getGameTime() - fadeStructureTimer > 120 || fadeStructureTimer == 0 || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("always")) {
 			structureName = structure;
 			fadeStructureTimer = minecraft.level.getGameTime();
 		}

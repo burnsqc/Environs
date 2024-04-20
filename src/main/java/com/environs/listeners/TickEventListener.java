@@ -46,7 +46,7 @@ public final class TickEventListener {
 				}
 
 				if (!dimensionName.equals(environsTracker.getMostRecentDimension())) {
-					if (environsTracker.addDimension(dimensionName) || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("always")) {
+					if (environsTracker.addDimension(dimensionName) || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("every") || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("always")) {
 						if (!EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("never")) {
 							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new ClientboundTriggerEnvironsTitleCardPacket("dimension", dimensionName));
 						}
@@ -54,7 +54,7 @@ public final class TickEventListener {
 				}
 
 				if (!biomeName.equals(environsTracker.getMostRecentBiome())) {
-					if (environsTracker.addBiome(biomeName) || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("always")) {
+					if (environsTracker.addBiome(biomeName) || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("every") || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("always")) {
 						if (!EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("never")) {
 							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new ClientboundTriggerEnvironsTitleCardPacket("biome", biomeName));
 						}
@@ -62,7 +62,7 @@ public final class TickEventListener {
 				}
 
 				if (!structureName.equals(environsTracker.getMostRecentStructure())) {
-					if (environsTracker.addStructure(structureName) || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("always") && !structureName.equals("")) {
+					if (environsTracker.addStructure(structureName) || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("every") && !structureName.equals("") || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("always")) {
 						if (!EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("never")) {
 							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new ClientboundTriggerEnvironsTitleCardPacket("structure", structureName));
 						}

@@ -5,7 +5,7 @@ license="All Rights Reserved"
 
 [[mods]]
     displayName="Environs"    
-    version="1.0.0-alpha1"
+    version="1.0.0-beta1"
     modId="environs"
     credits="Skullmaster31 - collaboration/testing"
     authors="burnsqc"
