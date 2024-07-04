@@ -117,19 +117,19 @@ public final class EnvironsTracker implements INBTSerializable<CompoundTag> {
 
 		if (getDimensions() != null) {
 			for (String string : getDimensions()) {
-				compoundTag.putString("dimension: " + string, string);
+				compoundTag.putString(string, string);
 			}
 		}
 
 		if (getBiomes() != null) {
 			for (String string : getBiomes()) {
-				compoundTag.putString("biome: " + string, string);
+				compoundTag.putString(string, string);
 			}
 		}
 
 		if (getStructures() != null) {
 			for (String string : getStructures()) {
-				compoundTag.putString("structure: " + string, string);
+				compoundTag.putString(string, string);
 			}
 		}
 
@@ -138,9 +138,9 @@ public final class EnvironsTracker implements INBTSerializable<CompoundTag> {
 
 	@Override
 	public void deserializeNBT(CompoundTag compoundTag) {
-		Set<String> dimensionsTemp = compoundTag.getAllKeys().stream().filter(s -> s.startsWith("dimension: ")).collect(Collectors.toSet());
-		Set<String> biomesTemp = compoundTag.getAllKeys().stream().filter(s -> s.startsWith("biome: ")).collect(Collectors.toSet());
-		Set<String> structuresTemp = compoundTag.getAllKeys().stream().filter(s -> s.startsWith("structure: ")).collect(Collectors.toSet());
+		Set<String> dimensionsTemp = compoundTag.getAllKeys().stream().filter(string -> string.startsWith("dimension.")).collect(Collectors.toSet());
+		Set<String> biomesTemp = compoundTag.getAllKeys().stream().filter(string -> string.startsWith("biome.")).collect(Collectors.toSet());
+		Set<String> structuresTemp = compoundTag.getAllKeys().stream().filter(string -> string.startsWith("structure.")).collect(Collectors.toSet());
 		Set<String> dimensions2 = Collections.emptySet();
 		Set<String> biomes2 = Collections.emptySet();
 		Set<String> structures2 = Collections.emptySet();

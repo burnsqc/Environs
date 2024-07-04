@@ -28,6 +28,11 @@ public final class EnvironsConfigClient {
 	public static final ForgeConfigSpec.ConfigValue<Boolean> UNDERLINE;
 	public static final ForgeConfigSpec.ConfigValue<Boolean> SHADOW;
 
+	public static final ForgeConfigSpec.ConfigValue<String> BACKDROP_STYLE;
+	public static final ForgeConfigSpec.ConfigValue<Integer> BACKDROP_COLOR;
+
+	public static final ForgeConfigSpec.ConfigValue<String> AUDIO_QUEUE;
+
 	static {
 		BUILDER.comment("ENVIRONS CLIENT CONFIG\n");
 
@@ -61,6 +66,15 @@ public final class EnvironsConfigClient {
 		BUILDER.push("STYLE");
 		UNDERLINE = BUILDER.comment("show title cards with underline").define("Underline", true);
 		SHADOW = BUILDER.comment("show title cards with shadow").define("Shadow", true);
+		BUILDER.pop();
+
+		BUILDER.push("BACKDROP");
+		BACKDROP_STYLE = BUILDER.comment("solid - Solid backdrop.\nvignette - Vignette.\nrvignette - Reverse vignette.\nnone - No backdrop").defineInList("Style", "rvignette", Arrays.asList("solid", "vignette", "rvignette", "none"));
+		BACKDROP_COLOR = BUILDER.defineInRange("Color", 0x000000, 0, 16777215);
+		BUILDER.pop();
+
+		BUILDER.push("AUDIO QUEUE");
+		AUDIO_QUEUE = BUILDER.comment("discover\nbell\nchime\nnone").defineInList("Sound", "discover", Arrays.asList("discover", "bell", "chime", "none"));
 		BUILDER.pop();
 
 		CLIENT_SPEC = BUILDER.build();

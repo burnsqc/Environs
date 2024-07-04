@@ -16,12 +16,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.network.PacketDistributor;
 
+@Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.FORGE)
 public final class TickEventListener {
 
 	@SubscribeEvent
-	public void onPlayerTick(final TickEvent.PlayerTickEvent event) {
+	public static void onPlayerTick(final TickEvent.PlayerTickEvent event) {
 		if (event.player instanceof ServerPlayer serverPlayer) {
 			EnvironsTracker environsTracker = serverPlayer.getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElse(null);
 
@@ -33,14 +36,14 @@ public final class TickEventListener {
 			BlockPos blockpos = BlockPos.containing(serverPlayer.position());
 
 			if (serverlevel.isLoaded(blockpos)) {
-				String dimensionName = TextUtil.stringToCapsName(TextUtil.getPath(serverPlayer.level().dimension()));
-				String biomeName = TextUtil.stringToCapsName(TextUtil.getPath(serverPlayer.level().getBiome(blockpos)));
+				String dimensionName = TextUtil.composeTranslatableDimension(serverPlayer.level().dimension());
+				String biomeName = TextUtil.composeTranslatableBiome(serverPlayer.level().getBiome(blockpos));
 				String structureName = "";
 
 				Registry<Structure> registry = serverlevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
 				for (Reference<Structure> structure : registry.holders().toList()) {
 					if (serverlevel.structureManager().getStructureWithPieceAt(blockpos, structure.get()).isValid()) {
-						structureName = TextUtil.stringToCapsName(TextUtil.getPath(structure));
+						structureName = TextUtil.composeTranslatableStructure(structure);
 						break;
 					}
 				}

@@ -4,8 +4,13 @@ import com.environs.capabilities.entity.EnvironsTracker;
 import com.environs.setup.events.EnvironsCapabilities;
 
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@Mod.EventBusSubscriber(bus = EventBusSubscriber.Bus.FORGE)
 public class PlayerEventListener {
+	@SubscribeEvent
 	public static void onClone(final PlayerEvent.Clone event) {
 		if (event.isWasDeath()) {
 			event.getOriginal().reviveCaps();

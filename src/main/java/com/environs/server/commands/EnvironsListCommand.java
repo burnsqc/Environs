@@ -49,7 +49,7 @@ public final class EnvironsListCommand {
 		}, false);
 		for (String biome : environsTracker.getBiomes()) {
 			stack.sendSuccess(() -> {
-				return Component.literal(biome).withStyle((p_265659_) -> {
+				return Component.translatable(biome).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
 				});
 			}, false);
@@ -67,7 +67,7 @@ public final class EnvironsListCommand {
 		}, false);
 		for (String dimension : environsTracker.getDimensions()) {
 			stack.sendSuccess(() -> {
-				return Component.literal(dimension).withStyle((p_265659_) -> {
+				return Component.translatable(dimension).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
 				});
 			}, false);
@@ -86,7 +86,7 @@ public final class EnvironsListCommand {
 		if (environsTracker.getStructures() != null) {
 			for (String structure : environsTracker.getStructures()) {
 				stack.sendSuccess(() -> {
-					return Component.literal(structure).withStyle((p_265659_) -> {
+					return Component.translatable(structure).withStyle((p_265659_) -> {
 						return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
 					});
 				}, false);

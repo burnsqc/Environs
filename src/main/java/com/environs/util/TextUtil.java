@@ -17,11 +17,15 @@ public final class TextUtil {
 		return name.trim();
 	}
 
-	public static String getPath(ResourceKey<?> resourceKey) {
-		return resourceKey.location().getPath().toString();
+	public static String composeTranslatableDimension(ResourceKey<?> resourceKey) {
+		return "dimension." + resourceKey.location().getNamespace() + "." + resourceKey.location().getPath();
 	}
 
-	public static String getPath(Holder<?> holder) {
-		return holder.unwrapKey().get().location().getPath().toString();
+	public static String composeTranslatableBiome(Holder<?> holder) {
+		return "biome." + holder.unwrapKey().get().location().getNamespace() + "." + holder.unwrapKey().get().location().getPath();
+	}
+
+	public static String composeTranslatableStructure(Holder<?> holder) {
+		return "structure." + holder.unwrapKey().get().location().getNamespace() + "." + holder.unwrapKey().get().location().getPath();
 	}
 }
