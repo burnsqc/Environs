@@ -1,4 +1,4 @@
-package com.environs.network.packets;
+package com.environs.network.packets.clientbound;
 
 import java.util.function.Supplier;
 
@@ -7,27 +7,27 @@ import com.environs.network.packethandlers.ClientboundPacketHandlers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
-public class ClientboundTriggerEnvironsTitleCardPacket {
+public class TriggerEnvironsTitleCardPacket {
 	private final String type;
 	private final String title;
 
-	public ClientboundTriggerEnvironsTitleCardPacket(String type, String title) {
+	public TriggerEnvironsTitleCardPacket(String type, String title) {
 		this.type = type;
 		this.title = title;
 	}
 
-	public static void encode(ClientboundTriggerEnvironsTitleCardPacket msg, FriendlyByteBuf buf) {
+	public static void encode(TriggerEnvironsTitleCardPacket msg, FriendlyByteBuf buf) {
 		buf.writeUtf(msg.type);
 		buf.writeUtf(msg.title);
 	}
 
-	public static ClientboundTriggerEnvironsTitleCardPacket decode(FriendlyByteBuf buf) {
+	public static TriggerEnvironsTitleCardPacket decode(FriendlyByteBuf buf) {
 		String type = buf.readUtf();
 		String title = buf.readUtf();
-		return new ClientboundTriggerEnvironsTitleCardPacket(type, title);
+		return new TriggerEnvironsTitleCardPacket(type, title);
 	}
 
-	public static void handle(ClientboundTriggerEnvironsTitleCardPacket packet, final Supplier<NetworkEvent.Context> context) {
+	public static void handle(TriggerEnvironsTitleCardPacket packet, final Supplier<NetworkEvent.Context> context) {
 		context.get().enqueueWork(() -> {
 			ClientboundPacketHandlers.handleTriggerEnvironmentTitleCard(packet, context);
 		});

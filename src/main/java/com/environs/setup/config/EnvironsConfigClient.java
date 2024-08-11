@@ -73,8 +73,8 @@ public final class EnvironsConfigClient {
 		BACKDROP_COLOR = BUILDER.defineInRange("Color", 0x000000, 0, 16777215);
 		BUILDER.pop();
 
-		BUILDER.push("AUDIO QUEUE");
-		AUDIO_QUEUE = BUILDER.comment("discover\nbell\nchime\nnone").defineInList("Sound", "discover", Arrays.asList("discover", "bell", "chime", "none"));
+		BUILDER.push("AUDIO");
+		AUDIO_QUEUE = BUILDER.comment("discover\nbell\nchime\nnone").defineInList("Queue", "discover", Arrays.asList("discover", "bell", "chime", "none"));
 		BUILDER.pop();
 
 		CLIENT_SPEC = BUILDER.build();

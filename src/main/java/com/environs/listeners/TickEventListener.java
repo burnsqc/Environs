@@ -2,7 +2,7 @@ package com.environs.listeners;
 
 import com.environs.Environs;
 import com.environs.capabilities.entity.EnvironsTracker;
-import com.environs.network.packets.ClientboundTriggerEnvironsTitleCardPacket;
+import com.environs.network.packets.clientbound.TriggerEnvironsTitleCardPacket;
 import com.environs.setup.config.EnvironsConfigClient;
 import com.environs.setup.events.EnvironsCapabilities;
 import com.environs.util.TextUtil;
@@ -51,7 +51,7 @@ public final class TickEventListener {
 				if (!dimensionName.equals(environsTracker.getMostRecentDimension())) {
 					if (environsTracker.addDimension(dimensionName) || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("every") || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("always")) {
 						if (!EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals("never")) {
-							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new ClientboundTriggerEnvironsTitleCardPacket("dimension", dimensionName));
+							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new TriggerEnvironsTitleCardPacket("dimension", dimensionName));
 						}
 					}
 				}
@@ -59,7 +59,7 @@ public final class TickEventListener {
 				if (!biomeName.equals(environsTracker.getMostRecentBiome())) {
 					if (environsTracker.addBiome(biomeName) || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("every") || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("always")) {
 						if (!EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals("never")) {
-							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new ClientboundTriggerEnvironsTitleCardPacket("biome", biomeName));
+							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new TriggerEnvironsTitleCardPacket("biome", biomeName));
 						}
 					}
 				}
@@ -67,7 +67,7 @@ public final class TickEventListener {
 				if (!structureName.equals(environsTracker.getMostRecentStructure())) {
 					if (environsTracker.addStructure(structureName) || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("every") && !structureName.equals("") || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("always")) {
 						if (!EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals("never")) {
-							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new ClientboundTriggerEnvironsTitleCardPacket("structure", structureName));
+							Environs.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayer), new TriggerEnvironsTitleCardPacket("structure", structureName));
 						}
 					}
 				}

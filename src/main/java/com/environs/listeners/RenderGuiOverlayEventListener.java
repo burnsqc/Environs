@@ -51,7 +51,7 @@ public final class RenderGuiOverlayEventListener {
 			if (dimensionName != null) {
 				dimensionWidth = minecraft.font.width(dimensionName);
 			}
-			if (dimensionName != null) {
+			if (biomeName != null) {
 				biomeWidth = minecraft.font.width(biomeName);
 			}
 			if (structureName != null) {
@@ -112,7 +112,7 @@ public final class RenderGuiOverlayEventListener {
 			} else if (EnvironsConfigClient.POSITION_VERTICAL.get().equals("center")) {
 				dimensionNamePosY = scaledHeight / 2 / dimensionSize - 16;
 			} else {
-				dimensionNamePosY = scaledHeight / dimensionSize - 48;
+				dimensionNamePosY = (scaledHeight - 120) / dimensionSize;
 			}
 
 			biomeNamePosY = (dimensionNamePosY + 11) * dimensionSize / biomeSize;
@@ -156,7 +156,7 @@ public final class RenderGuiOverlayEventListener {
 				event.getGuiGraphics().pose().popPose();
 			}
 
-			if (EnvironsConfigClient.BACKDROP_STYLE.get() != "none") {
+			if (!EnvironsConfigClient.BACKDROP_STYLE.get().equals("none")) {
 				int color = EnvironsConfigClient.BACKDROP_COLOR.get();
 
 				RenderSystem.enableBlend();
@@ -213,9 +213,9 @@ public final class RenderGuiOverlayEventListener {
 			if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("discover")) {
 				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.AMBIENT, 0.2F, 1.0F, false);
 			} else if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("bell")) {
-				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.AMBIENT, 0.2F, 0.2F, false);
+				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.AMBIENT, 3.0F, 0.2F, false);
 			} else if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("chime")) {
-				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.AMBIENT, 5.0F, 0.2F, false);
+				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.AMBIENT, 0.2F, 0.2F, false);
 			}
 		}
 	}
@@ -228,9 +228,9 @@ public final class RenderGuiOverlayEventListener {
 			if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("discover")) {
 				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.AMBIENT, 0.2F, 1.0F, false);
 			} else if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("bell")) {
-				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.AMBIENT, 0.2F, 0.2F, false);
+				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.AMBIENT, 3.0F, 0.2F, false);
 			} else if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("chime")) {
-				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.AMBIENT, 5.0F, 0.2F, false);
+				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.AMBIENT, 0.2F, 0.2F, false);
 			}
 		}
 	}
@@ -243,9 +243,9 @@ public final class RenderGuiOverlayEventListener {
 			if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("discover")) {
 				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.AMBIENT, 0.2F, 1.0F, false);
 			} else if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("bell")) {
-				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.AMBIENT, 0.2F, 0.2F, false);
+				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.AMBIENT, 3.0F, 0.2F, false);
 			} else if (EnvironsConfigClient.AUDIO_QUEUE.get().equals("chime")) {
-				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.AMBIENT, 5.0F, 0.2F, false);
+				minecraft.level.playLocalSound(minecraft.player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.AMBIENT, 0.2F, 0.2F, false);
 			}
 		}
 	}

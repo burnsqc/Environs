@@ -3,13 +3,13 @@ package com.environs.network.packethandlers;
 import java.util.function.Supplier;
 
 import com.environs.listeners.RenderGuiOverlayEventListener;
-import com.environs.network.packets.ClientboundTriggerEnvironsTitleCardPacket;
+import com.environs.network.packets.clientbound.TriggerEnvironsTitleCardPacket;
 
 import net.minecraftforge.network.NetworkEvent;
 
 public class ClientboundPacketHandlers {
 
-	public static void handleTriggerEnvironmentTitleCard(ClientboundTriggerEnvironsTitleCardPacket packet, final Supplier<NetworkEvent.Context> context) {
+	public static void handleTriggerEnvironmentTitleCard(TriggerEnvironsTitleCardPacket packet, final Supplier<NetworkEvent.Context> context) {
 		String type = packet.getType();
 		String title = packet.getTitle();
 		if (type.equals("dimension")) {

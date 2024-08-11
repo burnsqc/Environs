@@ -3,7 +3,7 @@ package com.environs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.environs.network.packets.ClientboundTriggerEnvironsTitleCardPacket;
+import com.environs.network.packets.clientbound.TriggerEnvironsTitleCardPacket;
 import com.environs.setup.ClientSetup;
 
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ public final class Environs {
 
 	public Environs() {
 		LOGGER.info("ENVIRONS NOW LOADING FOR DISTRIBUTION - " + FMLEnvironment.dist.toString());
-		CHANNEL.registerMessage(PACKET_ID++, ClientboundTriggerEnvironsTitleCardPacket.class, ClientboundTriggerEnvironsTitleCardPacket::encode, ClientboundTriggerEnvironsTitleCardPacket::decode, ClientboundTriggerEnvironsTitleCardPacket::handle);
+		CHANNEL.registerMessage(PACKET_ID++, TriggerEnvironsTitleCardPacket.class, TriggerEnvironsTitleCardPacket::encode, TriggerEnvironsTitleCardPacket::decode, TriggerEnvironsTitleCardPacket::handle);
 		if (FMLEnvironment.dist.isClient()) {
 			ClientSetup.init();
 		}
