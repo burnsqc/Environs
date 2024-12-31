@@ -10,6 +10,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -134,27 +135,27 @@ public final class RenderGuiOverlayEventListener {
 			}
 
 			if (dimensionAlpha > 0.015 && dimensionName != null) {
-				event.getGuiGraphics().pose().pushPose();
-				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
+				event.getPoseStack().pushPose();
+				Matrix4f matrix4f = event.getPoseStack().last().pose();
 				matrix4f.scale(dimensionSize, dimensionSize, dimensionSize);
 				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? dimensionName.withStyle(ChatFormatting.UNDERLINE) : dimensionName, dimensionNamePosX, dimensionNamePosY, EnvironsConfigClient.DIMENSION_COLOR.get() | (int) (dimensionAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
-				event.getGuiGraphics().pose().popPose();
+				event.getPoseStack().popPose();
 			}
 
 			if (biomeAlpha > 0.015 && biomeName != null) {
-				event.getGuiGraphics().pose().pushPose();
-				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
+				event.getPoseStack().pushPose();
+				Matrix4f matrix4f = event.getPoseStack().last().pose();
 				matrix4f.scale(biomeSize, biomeSize, biomeSize);
 				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? biomeName.withStyle(ChatFormatting.UNDERLINE) : biomeName, biomeNamePosX, biomeNamePosY, EnvironsConfigClient.BIOME_COLOR.get() | (int) (biomeAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
-				event.getGuiGraphics().pose().popPose();
+				event.getPoseStack().popPose();
 			}
 
 			if (structureAlpha > 0.015 && structureName != null) {
-				event.getGuiGraphics().pose().pushPose();
-				Matrix4f matrix4f = event.getGuiGraphics().pose().last().pose();
+				event.getPoseStack().pushPose();
+				Matrix4f matrix4f = event.getPoseStack().last().pose();
 				matrix4f.scale(structureSize, structureSize, structureSize);
 				minecraft.font.drawInBatch(EnvironsConfigClient.UNDERLINE.get() ? structureName.withStyle(ChatFormatting.UNDERLINE) : structureName, structureNamePosX, structurenamePosY, EnvironsConfigClient.STRUCTURE_COLOR.get() | (int) (structureAlpha * 255.0F) << 24, EnvironsConfigClient.SHADOW.get(), matrix4f, irendertypebuffer$impl, Font.DisplayMode.SEE_THROUGH, 0, 0);
-				event.getGuiGraphics().pose().popPose();
+				event.getPoseStack().popPose();
 			}
 
 			if (!EnvironsConfigClient.BACKDROP_STYLE.get().equals("none")) {
@@ -163,7 +164,7 @@ public final class RenderGuiOverlayEventListener {
 				RenderSystem.enableBlend();
 				RenderSystem.disableDepthTest();
 				RenderSystem.depthMask(false);
-				event.getGuiGraphics().pose().pushPose();
+				event.getPoseStack().pushPose();
 
 				float clamp = 0.5F;
 				int offsetX = 0;
@@ -194,11 +195,12 @@ public final class RenderGuiOverlayEventListener {
 
 				float fade = Mth.clamp(biomeAlpha + dimensionAlpha + structureAlpha, 0.0F, clamp);
 
-				event.getGuiGraphics().setColor(r, g, b, fade);
+				RenderSystem.setShaderColor(r, g, b, fade);
 				RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-				event.getGuiGraphics().blit(backdrop, offsetX, offsetY, -90, 0.0F, 0.0F, event.getGuiGraphics().guiWidth(), event.getGuiGraphics().guiHeight(), event.getGuiGraphics().guiWidth(), event.getGuiGraphics().guiHeight());
+				RenderSystem.setShaderTexture(0, backdrop);
+				GuiComponent.blit(event.getPoseStack(), offsetX, offsetY, -90, 0.0F, 0.0F, event.getWindow().getWidth(), event.getWindow().getHeight(), event.getWindow().getWidth(), event.getWindow().getHeight());
 
-				event.getGuiGraphics().pose().popPose();
+				event.getPoseStack().popPose();
 				RenderSystem.depthMask(true);
 				RenderSystem.enableDepthTest();
 				RenderSystem.defaultBlendFunc();

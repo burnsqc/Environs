@@ -42,55 +42,40 @@ public final class EnvironsListCommand {
 
 	private static int listBiomes(CommandSourceStack stack) {
 		EnvironsTracker environsTracker = stack.getPlayer().getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
-		stack.sendSuccess(() -> {
-			return Component.literal("Visited Biomes").withStyle((p_265659_) -> {
-				return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get()).withUnderlined(true);
-			});
-		}, false);
+		stack.sendSuccess(Component.literal("Visited Biomes").withStyle((p_265659_) -> {
+			return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get()).withUnderlined(true);
+		}), false);
 		for (String biome : environsTracker.getBiomes()) {
-			stack.sendSuccess(() -> {
-				return Component.translatable(biome).withStyle((p_265659_) -> {
-					return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
-				});
-			}, false);
-
+			stack.sendSuccess(Component.translatable(biome).withStyle((p_265659_) -> {
+				return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
+			}), false);
 		}
 		return 0;
 	}
 
 	private static int listDimensions(CommandSourceStack stack) {
 		EnvironsTracker environsTracker = stack.getPlayer().getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
-		stack.sendSuccess(() -> {
-			return Component.literal("Visited Dimensions").withStyle((p_265659_) -> {
-				return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get()).withUnderlined(true);
-			});
-		}, false);
+		stack.sendSuccess(Component.literal("Visited Dimensions").withStyle((p_265659_) -> {
+			return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get()).withUnderlined(true);
+		}), false);
 		for (String dimension : environsTracker.getDimensions()) {
-			stack.sendSuccess(() -> {
-				return Component.translatable(dimension).withStyle((p_265659_) -> {
-					return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
-				});
-			}, false);
-
+			stack.sendSuccess(Component.translatable(dimension).withStyle((p_265659_) -> {
+				return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
+			}), false);
 		}
 		return 0;
 	}
 
 	private static int listStructures(CommandSourceStack stack) {
 		EnvironsTracker environsTracker = stack.getPlayer().getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
-		stack.sendSuccess(() -> {
-			return Component.literal("Visited Structures").withStyle((p_265659_) -> {
-				return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get()).withUnderlined(true);
-			});
-		}, false);
+		stack.sendSuccess(Component.literal("Visited Structures").withStyle((p_265659_) -> {
+			return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get()).withUnderlined(true);
+		}), false);
 		if (environsTracker.getStructures() != null) {
 			for (String structure : environsTracker.getStructures()) {
-				stack.sendSuccess(() -> {
-					return Component.translatable(structure).withStyle((p_265659_) -> {
-						return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
-					});
-				}, false);
-
+				stack.sendSuccess(Component.translatable(structure).withStyle((p_265659_) -> {
+					return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
+				}), false);
 			}
 		}
 		return 0;
@@ -106,33 +91,27 @@ public final class EnvironsListCommand {
 	private static int purgeBiomes(CommandSourceStack stack) {
 		EnvironsTracker environsTracker = stack.getPlayer().getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
 		environsTracker.purgeBiomes();
-		stack.sendSuccess(() -> {
-			return Component.literal("Visited Biomes purged").withStyle((p_265659_) -> {
-				return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
-			});
-		}, false);
+		stack.sendSuccess(Component.literal("Visited Biomes purged").withStyle((p_265659_) -> {
+			return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
+		}), false);
 		return 0;
 	}
 
 	private static int purgeDimensions(CommandSourceStack stack) {
 		EnvironsTracker environsTracker = stack.getPlayer().getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
 		environsTracker.purgeDimensions();
-		stack.sendSuccess(() -> {
-			return Component.literal("Visited Dimensions purged").withStyle((p_265659_) -> {
-				return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
-			});
-		}, false);
+		stack.sendSuccess(Component.literal("Visited Dimensions purged").withStyle((p_265659_) -> {
+			return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
+		}), false);
 		return 0;
 	}
 
 	private static int purgeStructures(CommandSourceStack stack) {
 		EnvironsTracker environsTracker = stack.getPlayer().getCapability(EnvironsCapabilities.ENVIRONS_TRACKER_INSTANCE).orElseThrow(NullPointerException::new);
 		environsTracker.purgeStructures();
-		stack.sendSuccess(() -> {
-			return Component.literal("Visited Structures purged").withStyle((p_265659_) -> {
-				return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
-			});
-		}, false);
+		stack.sendSuccess(Component.literal("Visited Structures purged").withStyle((p_265659_) -> {
+			return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
+		}), false);
 		return 0;
 	}
 }
