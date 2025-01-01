@@ -178,7 +178,7 @@ public final class RenderGuiOverlayEventListener {
 			if (dimensionAlpha > 0.015 && dimensionName != null) {
 				poseStack.pushPose();
 				Matrix4f matrix4f = poseStack.last().pose();
-				matrix4f.scale(dimensionSize, dimensionSize, dimensionSize);
+				matrix4f.multiply(Matrix4f.createScaleMatrix(dimensionSize, dimensionSize, dimensionSize));
 				font.drawInBatch(dimensionName, dimensionNamePosX, dimensionNamePosY, dimensionColor, shadow, matrix4f, bufferSource, true, 0, 0);
 				poseStack.popPose();
 			}
@@ -186,7 +186,7 @@ public final class RenderGuiOverlayEventListener {
 			if (biomeAlpha > 0.015 && biomeName != null) {
 				poseStack.pushPose();
 				Matrix4f matrix4f = poseStack.last().pose();
-				matrix4f.scale(biomeSize, biomeSize, biomeSize);
+				matrix4f.multiply(Matrix4f.createScaleMatrix(biomeSize, biomeSize, biomeSize));
 				font.drawInBatch(biomeName, biomeNamePosX, biomeNamePosY, biomeColor, shadow, matrix4f, bufferSource, true, 0, 0);
 				poseStack.popPose();
 			}
@@ -194,7 +194,7 @@ public final class RenderGuiOverlayEventListener {
 			if (structureAlpha > 0.015 && structureName != null) {
 				poseStack.pushPose();
 				Matrix4f matrix4f = poseStack.last().pose();
-				matrix4f.scale(structureSize, structureSize, structureSize);
+				matrix4f.multiply(Matrix4f.createScaleMatrix(structureSize, structureSize, structureSize));
 				font.drawInBatch(structureName, structureNamePosX, structurenamePosY, structureColor, shadow, matrix4f, bufferSource, true, 0, 0);
 				poseStack.popPose();
 			}
