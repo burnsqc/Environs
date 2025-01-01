@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.Position;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -42,7 +41,7 @@ public final class TickEventListener {
 				String biomeName = TextUtil.composeTranslatableBiome(serverPlayer.level.getBiome(blockpos));
 				String structureName = "";
 
-				Registry<Structure> registry = serverlevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
+				Registry<Structure> registry = serverlevel.registryAccess().registryOrThrow(Registry.STRUCTURE_REGISTRY);
 				for (Reference<Structure> structure : registry.holders().toList()) {
 					if (serverlevel.structureManager().getStructureWithPieceAt(blockpos, structure.get()).isValid()) {
 						structureName = TextUtil.composeTranslatableStructure(structure);
