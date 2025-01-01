@@ -3,6 +3,7 @@ package com.environs.server.commands;
 import com.environs.capabilities.entity.EnvironsTracker;
 import com.environs.config.EnvironsConfigClient;
 import com.environs.setup.events.EnvironsCapabilities;
+import com.environs.util.TextUtil;
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.commands.CommandSourceStack;
@@ -49,7 +50,7 @@ public final class EnvironsListCommand {
 		}, false);
 		for (String biome : environsTracker.getBiomes()) {
 			stack.sendSuccess(() -> {
-				return Component.translatable(biome).withStyle((p_265659_) -> {
+				return Component.translatableWithFallback(biome, TextUtil.translationFallbackGuess(biome)).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
 				});
 			}, false);
@@ -67,7 +68,7 @@ public final class EnvironsListCommand {
 		}, false);
 		for (String dimension : environsTracker.getDimensions()) {
 			stack.sendSuccess(() -> {
-				return Component.translatable(dimension).withStyle((p_265659_) -> {
+				return Component.translatableWithFallback(dimension, TextUtil.translationFallbackGuess(dimension)).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
 				});
 			}, false);
@@ -86,7 +87,7 @@ public final class EnvironsListCommand {
 		if (environsTracker.getStructures() != null) {
 			for (String structure : environsTracker.getStructures()) {
 				stack.sendSuccess(() -> {
-					return Component.translatable(structure).withStyle((p_265659_) -> {
+					return Component.translatableWithFallback(structure, TextUtil.translationFallbackGuess(structure)).withStyle((p_265659_) -> {
 						return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
 					});
 				}, false);
