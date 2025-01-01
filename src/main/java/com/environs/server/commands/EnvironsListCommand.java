@@ -3,6 +3,7 @@ package com.environs.server.commands;
 import com.environs.capabilities.entity.EnvironsTracker;
 import com.environs.config.EnvironsConfigClient;
 import com.environs.setup.events.EnvironsCapabilities;
+import com.environs.util.TextUtil;
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.commands.CommandSourceStack;
@@ -46,7 +47,7 @@ public final class EnvironsListCommand {
 			return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get()).withUnderlined(true);
 		}), false);
 		for (String biome : environsTracker.getBiomes()) {
-			stack.sendSuccess(Component.translatable(biome).withStyle((p_265659_) -> {
+			stack.sendSuccess(Component.translatableWithFallback(biome, TextUtil.translationFallbackGuess(biome)).withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.BIOME_COLOR.get());
 			}), false);
 		}
@@ -59,7 +60,7 @@ public final class EnvironsListCommand {
 			return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get()).withUnderlined(true);
 		}), false);
 		for (String dimension : environsTracker.getDimensions()) {
-			stack.sendSuccess(Component.translatable(dimension).withStyle((p_265659_) -> {
+			stack.sendSuccess(Component.translatableWithFallback(dimension, TextUtil.translationFallbackGuess(dimension)).withStyle((p_265659_) -> {
 				return p_265659_.withColor(EnvironsConfigClient.DIMENSION_COLOR.get());
 			}), false);
 		}
@@ -73,7 +74,7 @@ public final class EnvironsListCommand {
 		}), false);
 		if (environsTracker.getStructures() != null) {
 			for (String structure : environsTracker.getStructures()) {
-				stack.sendSuccess(Component.translatable(structure).withStyle((p_265659_) -> {
+				stack.sendSuccess(Component.translatableWithFallback(structure, TextUtil.translationFallbackGuess(structure)).withStyle((p_265659_) -> {
 					return p_265659_.withColor(EnvironsConfigClient.STRUCTURE_COLOR.get());
 				}), false);
 			}
