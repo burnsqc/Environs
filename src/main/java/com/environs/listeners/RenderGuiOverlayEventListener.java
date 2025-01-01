@@ -13,7 +13,6 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -41,7 +40,7 @@ public final class RenderGuiOverlayEventListener {
 	public static void onPre(final RenderGuiOverlayEvent.Pre event) {
 		if (event.getOverlay() == VanillaGuiOverlay.CROSSHAIR.type()) {
 			Window window = event.getWindow();
-			PoseStack poseStack = event.getPoseStack();
+			PoseStack poseStack = event.getGuiGraphics().pose();
 			Minecraft minecraft = Minecraft.getInstance();
 			Font font = minecraft.font;
 			time = minecraft.level.getGameTime();
@@ -168,8 +167,7 @@ public final class RenderGuiOverlayEventListener {
 
 				RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 				RenderSystem.setShaderColor(red, green, blue, alpha);
-				RenderSystem.setShaderTexture(0, EnvironsConfigClient.BACKDROP_STYLE.get().getTexture());
-				GuiComponent.blit(poseStack, offsetX, offsetY, -90, 0.0F, 0.0F, scaledWidth, scaledHeight, scaledWidth, scaledHeight);
+				event.getGuiGraphics().blit(EnvironsConfigClient.BACKDROP_STYLE.get().getTexture(), offsetX, offsetY, -90, 0.0F, 0.0F, scaledWidth, scaledHeight, scaledWidth, scaledHeight);
 
 				RenderSystem.depthMask(true);
 				RenderSystem.enableDepthTest();

@@ -32,12 +32,12 @@ public final class TickEventListener {
 				return;
 			}
 
-			ServerLevel serverlevel = serverPlayer.getLevel();
+			ServerLevel serverlevel = serverPlayer.serverLevel();
 			BlockPos blockpos = BlockPos.containing(serverPlayer.position());
 
 			if (serverlevel.isLoaded(blockpos)) {
-				String dimensionName = TextUtil.composeTranslatableDimension(serverPlayer.level.dimension());
-				String biomeName = TextUtil.composeTranslatableBiome(serverPlayer.level.getBiome(blockpos));
+				String dimensionName = TextUtil.composeTranslatableDimension(serverPlayer.level().dimension());
+				String biomeName = TextUtil.composeTranslatableBiome(serverPlayer.level().getBiome(blockpos));
 				String structureName = "";
 
 				Registry<Structure> registry = serverlevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
