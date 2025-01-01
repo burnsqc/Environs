@@ -4,8 +4,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 
 public final class TextUtil {
-	public static String stringToCapsName(String string) {
-		String words[] = string.split("_");
+	public static String translationFallbackGuess(String string) {
+		String split[] = string.split("\\.");
+		String path = split[split.length - 1];
+		String words[] = path.split("_");
 		String name = "";
 
 		for (String word : words) {

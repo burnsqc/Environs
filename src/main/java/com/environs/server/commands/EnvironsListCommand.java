@@ -1,7 +1,7 @@
 package com.environs.server.commands;
 
 import com.environs.capabilities.entity.EnvironsTracker;
-import com.environs.setup.config.EnvironsConfigClient;
+import com.environs.config.EnvironsConfigClient;
 import com.environs.setup.events.EnvironsCapabilities;
 import com.mojang.brigadier.CommandDispatcher;
 

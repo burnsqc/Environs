@@ -1,6 +1,6 @@
 package com.environs.setup;
 
-import com.environs.setup.config.EnvironsConfigClient;
+import com.environs.config.EnvironsConfigClient;
 
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig.Type;
