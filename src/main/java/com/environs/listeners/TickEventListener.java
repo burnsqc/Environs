@@ -9,10 +9,12 @@ import com.environs.util.TextUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder.Reference;
+import net.minecraft.core.Position;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +35,7 @@ public final class TickEventListener {
 			}
 
 			ServerLevel serverlevel = serverPlayer.getLevel();
-			BlockPos blockpos = BlockPos.containing(serverPlayer.position());
+			BlockPos blockpos = containing(serverPlayer.position());
 
 			if (serverlevel.isLoaded(blockpos)) {
 				String dimensionName = TextUtil.composeTranslatableDimension(serverPlayer.level.dimension());
@@ -73,5 +75,14 @@ public final class TickEventListener {
 				}
 			}
 		}
+	}
+
+	// These two methods are only available in BlockPos as of 1.19.4
+	public static BlockPos containing(Position p_275443_) {
+		return containing(p_275443_.x(), p_275443_.y(), p_275443_.z());
+	}
+
+	public static BlockPos containing(double p_275310_, double p_275414_, double p_275737_) {
+		return new BlockPos(Mth.floor(p_275310_), Mth.floor(p_275414_), Mth.floor(p_275737_));
 	}
 }

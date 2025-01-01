@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[45,)"
+loaderVersion="[44,)"
 logoFile="environs.png"
 license="All Rights Reserved"
 
@@ -14,13 +14,13 @@ license="All Rights Reserved"
 [[dependencies.environs]] 
     modId="forge" 
     mandatory=true
-    versionRange="[45,)"
+    versionRange="[44,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.environs]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4]"
+    versionRange="[1.19.3]"
     ordering="NONE"
     side="BOTH"

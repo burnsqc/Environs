@@ -15,7 +15,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -181,7 +180,7 @@ public final class RenderGuiOverlayEventListener {
 				poseStack.pushPose();
 				Matrix4f matrix4f = poseStack.last().pose();
 				matrix4f.scale(dimensionSize, dimensionSize, dimensionSize);
-				font.drawInBatch(dimensionName, dimensionNamePosX, dimensionNamePosY, dimensionColor, shadow, matrix4f, bufferSource, Font.DisplayMode.SEE_THROUGH, 0, 0);
+				font.drawInBatch(dimensionName, dimensionNamePosX, dimensionNamePosY, dimensionColor, shadow, matrix4f, bufferSource, true, 0, 0);
 				poseStack.popPose();
 			}
 
@@ -189,7 +188,7 @@ public final class RenderGuiOverlayEventListener {
 				poseStack.pushPose();
 				Matrix4f matrix4f = poseStack.last().pose();
 				matrix4f.scale(biomeSize, biomeSize, biomeSize);
-				font.drawInBatch(biomeName, biomeNamePosX, biomeNamePosY, biomeColor, shadow, matrix4f, bufferSource, Font.DisplayMode.SEE_THROUGH, 0, 0);
+				font.drawInBatch(biomeName, biomeNamePosX, biomeNamePosY, biomeColor, shadow, matrix4f, bufferSource, true, 0, 0);
 				poseStack.popPose();
 			}
 
@@ -197,7 +196,7 @@ public final class RenderGuiOverlayEventListener {
 				poseStack.pushPose();
 				Matrix4f matrix4f = poseStack.last().pose();
 				matrix4f.scale(structureSize, structureSize, structureSize);
-				font.drawInBatch(structureName, structureNamePosX, structurenamePosY, structureColor, shadow, matrix4f, bufferSource, Font.DisplayMode.SEE_THROUGH, 0, 0);
+				font.drawInBatch(structureName, structureNamePosX, structurenamePosY, structureColor, shadow, matrix4f, bufferSource, true, 0, 0);
 				poseStack.popPose();
 			}
 			bufferSource.endBatch();
@@ -207,7 +206,7 @@ public final class RenderGuiOverlayEventListener {
 	public static void triggerDimensionTitleCard(String dimension) {
 		Minecraft minecraft = Minecraft.getInstance();
 		if (minecraft.level.getGameTime() - fadeDimensionTimer > 120 || fadeDimensionTimer == 0 || EnvironsConfigClient.DIMENSION_TITLE_CARDS.get().equals(EnvironsConfigClient.Trigger.ALWAYS)) {
-			dimensionName = Component.translatableWithFallback(dimension, TextUtil.translationFallbackGuess(dimension));
+			dimensionName = TextUtil.translatableWithFallback(dimension, TextUtil.translationFallbackGuess(dimension));
 			fadeDimensionTimer = minecraft.level.getGameTime();
 			playAudioAlert();
 		}
@@ -216,7 +215,7 @@ public final class RenderGuiOverlayEventListener {
 	public static void triggerBiomeTitleCard(String biome) {
 		Minecraft minecraft = Minecraft.getInstance();
 		if (minecraft.level.getGameTime() - fadeBiomeTimer > 120 || fadeBiomeTimer == 0 || EnvironsConfigClient.BIOME_TITLE_CARDS.get().equals(EnvironsConfigClient.Trigger.ALWAYS)) {
-			biomeName = Component.translatableWithFallback(biome, TextUtil.translationFallbackGuess(biome));
+			biomeName = TextUtil.translatableWithFallback(biome, TextUtil.translationFallbackGuess(biome));
 			fadeBiomeTimer = minecraft.level.getGameTime();
 			playAudioAlert();
 		}
@@ -225,7 +224,7 @@ public final class RenderGuiOverlayEventListener {
 	public static void triggerStructureTitleCard(String structure) {
 		Minecraft minecraft = Minecraft.getInstance();
 		if (minecraft.level.getGameTime() - fadeStructureTimer > 120 || fadeStructureTimer == 0 || EnvironsConfigClient.STRUCTURE_TITLE_CARDS.get().equals(EnvironsConfigClient.Trigger.ALWAYS)) {
-			structureName = Component.translatableWithFallback(structure, TextUtil.translationFallbackGuess(structure));
+			structureName = TextUtil.translatableWithFallback(structure, TextUtil.translationFallbackGuess(structure));
 			fadeStructureTimer = minecraft.level.getGameTime();
 			if (structureName.getString() != "") {
 				playAudioAlert();

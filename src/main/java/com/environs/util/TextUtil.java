@@ -1,6 +1,11 @@
 package com.environs.util;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.core.Holder;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 
 public final class TextUtil {
@@ -29,5 +34,16 @@ public final class TextUtil {
 
 	public static String composeTranslatableStructure(Holder<?> holder) {
 		return "structure." + holder.unwrapKey().get().location().getNamespace() + "." + holder.unwrapKey().get().location().getPath();
+	}
+
+	// translatableWithFallback if only available in Component as of 1.19.4
+	public static MutableComponent translatableWithFallback(String key, @Nullable String fallback) {
+		Language language = Language.getInstance();
+		if (language.has(key)) {
+			return Component.translatable(key);
+		} else if (fallback != null) {
+			return Component.literal(fallback);
+		}
+		return Component.translatable(key);
 	}
 }
